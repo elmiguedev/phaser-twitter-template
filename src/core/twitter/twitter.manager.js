@@ -21,6 +21,11 @@ class TwitterManager {
         });
     }
 
+    destroyStream(key) {
+        this.streams[key].stop();
+        delete this.streams[key];
+    }
+
     getTweets(query) {
 
     }

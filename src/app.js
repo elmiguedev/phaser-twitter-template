@@ -7,7 +7,10 @@ const port = process.env.PORT || 8080;
 const TwitterManager = require("./core/twitter/twitter.manager");
 const manager = new TwitterManager();
 manager.createStream("javascript", ["#javascript"], (tweet) => {
-    console.log(tweet);
+    console.log("JAVASCRIPT!");
+});
+manager.createStream("python", ["#python"], (tweet) => {
+    console.log("PYTHON!");
 });
 
 app.use("/", express.static("dist"));
