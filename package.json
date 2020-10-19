@@ -19,7 +19,8 @@
     "nodemon": "^2.0.5",
     "parcel-bundler": "^1.12.4",
     "socket.io": "^2.3.0",
-    "twit": "^2.2.11"
+    "twit": "^2.2.11",
+    "dotenv": "8.2.0"
   },
   "dependencies": {
     "phaser": "^3.24.1"
