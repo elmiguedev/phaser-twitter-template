@@ -4,9 +4,9 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 8080;
 
-const TwitterManager = require("./utils/twitter.manager");
+const TwitterManager = require("./core/twitter/twitter.manager");
 const manager = new TwitterManager();
-manager.createStream(["#javascript"], (tweet) => {
+manager.createStream("javascript", ["#javascript"], (tweet) => {
     console.log(tweet);
 });
 
