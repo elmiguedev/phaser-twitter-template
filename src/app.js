@@ -1,13 +1,9 @@
 const express = require("express");
 const app = express();
+const port = process.env.PORT || 8080;
 
 app.use("/", express.static("dist"));
-app.get("/test", (req, res) => {
-    res.send("Hello express");
-})
 
-app.listen(8081, () => {
-    console.log(__dirname);
-
-    console.log("server escuchando en el 8081 yea2");
+app.listen(port, () => {
+    console.log(`server listening at port ${port}`);
 })
