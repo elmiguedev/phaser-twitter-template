@@ -18,6 +18,13 @@ Node.js is required to install dependencies and run scripts via npm.
 | npm run dev | execute watch-game and watch-server with concurrently, great for game development :D |
 | npm start | build phaser game and run the node server |
 
+## Getting started
+
+1. Clone this repo
+2. Run npm install from your project directory
+3. Start the local development server by running npm run dev. (After that you can edit any files in the src folder and Parcel/Nodemon will automatically recompile and reload your game and server (available at http://localhost:8080 by default).
+4. Code!!
+
 
 
 
