@@ -1,0 +1,27 @@
+{
+  "name": "twitter-game-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build-game": "parcel build src/game/index.js src/game/index.html",
+    "watch-game": "parcel watch src/game/index.js src/game/index.html",
+    "run-server": "node src/app.js",
+    "watch-server": "nodemon src/app.js",
+    "dev": "concurrently \"npm run watch-game\" \"npm run watch-server\"",
+    "start": "npm run build-game && run-server"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.5",
+    "parcel-bundler": "^1.12.4",
+    "socket.io": "^2.3.0",
+    "twit": "^2.2.11"
+  },
+  "dependencies": {
+    "phaser": "^3.24.1"
+  }
+}
