@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import io from "socket.io-client";
 
 export default class MainScene extends Phaser.Scene {
     constructor() {
@@ -15,6 +16,17 @@ export default class MainScene extends Phaser.Scene {
             up: this.input.keyboard.addKey("up"),
             down: this.input.keyboard.addKey("down"),
         }
+
+        this.socket = io();
+        this.socket.on("tweet", (data) => {
+            console.log(data);
+            this.add.text(
+                Phaser.Math.Between(10, 630),
+                Phaser.Math.Between(10, 470),
+                data.tag
+            );
+        })
+
     }
 
     update() {

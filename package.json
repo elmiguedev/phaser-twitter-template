@@ -9,7 +9,7 @@
     "run-server": "node src/app.js",
     "watch-server": "nodemon src/app.js",
     "dev": "concurrently \"npm run watch-game\" \"npm run watch-server\"",
-    "start": "npm run build-game && run-server"
+    "start": "npm run build-game && npm run run-server"
   },
   "author": "",
   "license": "ISC",
