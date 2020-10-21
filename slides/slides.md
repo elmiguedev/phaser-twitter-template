@@ -104,16 +104,38 @@ https://fsymbols.com/es/generadores/tarty/
 
         ░ Permisos !! 🚨
 
+        ░ USES CASES y DOCS
+
+    █ SETUPEAR EL PROYECTO -> 
+
+< -------------------------------------------- ฅ^•ﻌ•^ฅ --------------------------------------------------------- />
 
 
+▀█▀ █▀▀ █▀▀ █▄░█ █▀█ █░░ █▀█ █▀▀ █ ▄▀█ █▀   ▄▀█   █░█ ▀█▀ █ █░░ █ ▀█ ▄▀█ █▀█
+░█░ ██▄ █▄▄ █░▀█ █▄█ █▄▄ █▄█ █▄█ █ █▀█ ▄█   █▀█   █▄█ ░█░ █ █▄▄ █ █▄ █▀█ █▀▄
 
 
+    █ JS :D (y si, estamos en beerjs, sino homer0 me echa)
+
+        ░ ...   pero técnicamente se puede usar cualquier lenguaje que disponga de algún cliente HTTP para 
+                poder hacer peticiones a la api 🙊
+
+    █ ⬢ NODE JS: para el servidor, quién escuchará los tweets y los mandará al juego
+
+        ░ Twit: https://github.com/ttezel/twit (1.1)
+
+        ░ Express: para manejar las request del servidor (no es realmente necesario, pero meh)
+
+        ░ Socket IO: Para la comunicación con entre servidor y cliente en tiempo real
+
+            - Aclaración: esto es porque en este caso puntual, haremos un juego en tiempo real.
+
+    █ 🚀 PHASER JS: Librería utilizada para crear juegos 2D sobre un canvas (CANVAS/WEBBGL)
+
+    █ 📦 PARCEL: Bundler copado, rapido, zero configuration. Para traspilar y ejecutar el proyecto
 
 
-
-
-
-
+< -------------------------------------------- ฅ^•ﻌ•^ฅ --------------------------------------------------------- />
 
 
 
