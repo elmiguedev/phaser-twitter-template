@@ -8,6 +8,9 @@ const gameServer = new GameServer();
 gameServer.createTweetListener({
     key: "js",
     filter: ["#javascript"],
+    callback: (t) => {
+        console.log("JS!, " + t.id);
+    }
 });
 gameServer.createTweetListener({
     key: "py",

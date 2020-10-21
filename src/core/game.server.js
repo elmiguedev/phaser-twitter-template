@@ -1,3 +1,4 @@
+const { static } = require("express");
 const express = require("express");
 const http = require("http");
 const io = require("socket.io");
@@ -44,6 +45,7 @@ class GameServer {
     }
 
     createExpressRoutes() {
+        this.expressApp.use("/", express.static("dist"));
         this.expressApp.get("/test", (req, res) => {
             res.send("Hello game world!");
         });
