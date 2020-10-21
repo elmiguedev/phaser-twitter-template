@@ -86,12 +86,23 @@ https://fsymbols.com/es/generadores/tarty/
 < -------------------------------------------- ฅ^•ﻌ•^ฅ --------------------------------------------------------- />
 
 
+█▀▀ █▀█ █▀▄▀█ █▀█   █▀▀ █▀▄▀█ █▀█ █▀▀ ▀█ ▄▀█ █▀▄▀█ █▀█ █▀
+█▄▄ █▄█ █░▀░█ █▄█   ██▄ █░▀░█ █▀▀ ██▄ █▄ █▀█ █░▀░█ █▄█ ▄█
 
 
+    █ DEBEMOS CREAR UNA CUENTA EN TWITER (duh)
 
+        ░ Cuenta desde la cual nuestro servidor se autenticará y realizará acciones
 
+    █ CREAR UNA APLICACIÓN EN EL PORTAL DE "DEVELOPERS" DE TWITTER 🐦
 
+        ░ https://developer.twitter.com/
 
+        ░ Debemos completar un pequeño formulario donde se describe para qué utilizaremos la API
+
+        !!! -> Twitter detecta a los bots spameros (sino preguntenlé al nani)
+
+        ░ Permisos !! 🚨
 
 
 
