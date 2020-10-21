@@ -1,3 +1,4 @@
+const { static } = require("express");
 const express = require("express");
 const http = require("http");
 const io = require("socket.io");
@@ -14,8 +15,8 @@ class GameServer {
         this.createTwitterManager();
     }
 
-    // methods
-    // ------------------
+    // game configuration methods
+    // --------------------------
 
     createServerListener() {
 
@@ -35,25 +36,23 @@ class GameServer {
 
     createTwitterManager() {
         this.twitterManager = new TwitterManager();
-        this.twitterManager.createStream("js", ["#javascript"], (tweet) => {
-            console.log("JAVASCRIPT!")
-        });
-        this.twitterManager.createStream("py", ["#python"], (tweet) => {
-            console.log("PYTHON!")
-        });
     }
 
     createServerMessages() {
         this.serverSocket.on("connection", (socket) => {
             console.log(`new socket connected (id: ${socket.id})`);
-        })
+        });
     }
 
     createExpressRoutes() {
+        this.expressApp.use("/", express.static("dist"));
         this.expressApp.get("/test", (req, res) => {
             res.send("Hello game world!");
-        })
+        });
     }
+
+    // action methods
+    // -------------------------
 
     start() {
         this.httpServer.listen(this.port, () => {
@@ -61,6 +60,19 @@ class GameServer {
         })
     }
 
+    createTweetListener(options) {
+        this.twitterManager.createStream(options.key, options.filter, (tweet) => {
+            // emit to all client when a tweet appears
+            this.serverSocket.emit("tweet", {
+                key: options.key,
+                tweet: tweet
+            });
+
+            // call callback if it exists
+            if (options.callback)
+                options.callback(tweet);
+        });
+    }
 
 
 }
