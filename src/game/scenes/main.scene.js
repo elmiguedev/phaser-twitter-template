@@ -36,16 +36,16 @@ export default class MainScene extends Phaser.Scene {
     createTwitterListener() {
         this.serverManager = new ServerManager();
         this.serverManager.onTweet((data) => {
-            this.createRandomText(data.key);
+            this.createRandomText(data);
         });
     }
 
     /**
      * creates a random text, depending on the received key
      */
-    createRandomText(key) {
+    createRandomText(data) {
         let text = "";
-        switch (key) {
+        switch (data.key) {
             case "js":
                 text = "Javascript!"
                 break;
@@ -59,7 +59,7 @@ export default class MainScene extends Phaser.Scene {
         this.add.text(
             Phaser.Math.Between(10, 630),
             Phaser.Math.Between(10, 470),
-            text
+            "🐦" + data.tweet.username + ": " + text
         );
     }
 
