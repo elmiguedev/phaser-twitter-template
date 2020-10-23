@@ -7,8 +7,8 @@ export default class Game extends Phaser.Game {
         super({
             type: Phaser.AUTO,
             parent: "divGame",
-            width: 640,
-            height: 480,
+            width: 800,
+            height: 600,
             scene: [
                 BootloaderScene,
                 MainScene
