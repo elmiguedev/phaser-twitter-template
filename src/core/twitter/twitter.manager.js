@@ -13,6 +13,10 @@ class TwitterManager {
         this.streams = {};
     }
 
+    // twitter stream
+    // -------------------------------
+    
+    
     createStream(key, wordsArray, callback) {
         this.streams[key] = this.twitterClient.stream("statuses/filter", {
             track: wordsArray
@@ -26,13 +30,24 @@ class TwitterManager {
         delete this.streams[key];
     }
 
-    getTweets(query) {
+    // twitter post
+    // -------------------------------
+    
+    sendTweet(tweet) {
+        this.twitterClient.post("statuses/update",
+        {
+            status: tweet.message,
+            attachment_url: tweet.imageUrl
+        },
+        (err,res) => {
+            if (tweet.callback)
+                tweet.callback();
+        })
+        this.twitterClient.postMediaChunked({
 
+        })
     }
 
-    postTweet() {
-
-    }
 
     parseTweet(tweet) {
         const parsedTweet = new Tweet();
