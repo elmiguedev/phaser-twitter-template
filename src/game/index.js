@@ -1,4 +1,4 @@
-import Phaser from "phaser";
+import Phaser, { Physics } from "phaser";
 import BootloaderScene from "./scenes/bootloader.scene"
 import MainScene from "./scenes/main.scene"
 
@@ -12,7 +12,11 @@ export default class Game extends Phaser.Game {
             scene: [
                 BootloaderScene,
                 MainScene
-            ]
+            ],
+            physics: {
+                default: "arcade",
+                
+            }
         });
     }
 }

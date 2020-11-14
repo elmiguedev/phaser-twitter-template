@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import ServerManager from "../core/server.manager";
+import io from "socket.io-client"
 
 export default class MainScene extends Phaser.Scene {
     constructor() {
@@ -12,72 +12,102 @@ export default class MainScene extends Phaser.Scene {
     // ----------------------------
 
     /**
-     * Just an example entity which can move around the screen
+     * creamos las imagenes base del juego
      */
-    createMonkey() {
-        this.monkey = this.add.image(100, 100, "monkey");
+    createBase() {
+        this.fondo = this.add.image(0,0,"fondo").setOrigin(0);
+        this.ballsGroup = this.physics.add.group();
+        this.aJs = this.add.image(40,450,"aJs").setOrigin(0);
+        this.aPy = this.add.image(340,450,"aPy").setOrigin(0);
+        this.base = this.physics.add.sprite(5, 450, "base").setOrigin(0).setImmovable(true);
+        this.c1 = this.physics.add.sprite(5, 260, "c1").setOrigin(0).setImmovable(true);
+        this.c2 = this.physics.add.sprite(266, 260, "c2").setOrigin(0).setImmovable(true);
+        this.c3 = this.physics.add.sprite(564, 260, "c3").setOrigin(0).setImmovable(true);
+        this.baseGroup = this.physics.add.group({
+            immovable: true,
+            allowGravity: false,
+        });
+        this.baseGroup.add(this.base);
+        this.baseGroup.add(this.c1);
+        this.baseGroup.add(this.c2);
+        this.baseGroup.add(this.c3);
+
+
     }
 
     /**
-     * creates keys for example entity
+     * creamos las teclas de prueba
      */
     createKeys() {
         this.teclas = {
-            left: this.input.keyboard.addKey("left"),
-            right: this.input.keyboard.addKey("right"),
-            up: this.input.keyboard.addKey("up"),
-            down: this.input.keyboard.addKey("down"),
+            js: this.input.keyboard.addKey("j"),
+            py: this.input.keyboard.addKey("p"),
         }
     }
 
     /**
-     * creates io listener for tweets, through ServerManager instance
+     * creamos el controlador de twitter
      */
     createTwitterListener() {
-        this.serverManager = new ServerManager();
-        this.serverManager.onTweet((data) => {
-            this.createRandomText(data.key);
-        });
+        this.socket = io();
+        this.socket.on("tweet", (tweet) => {
+
+                console.log(tweet);
+                this.createRandomText(tweet.user);
+                this.createBall(tweet.key)
+        })
     }
 
     /**
-     * creates a random text, depending on the received key
+     * crea un texto random del usuario
      */
-    createRandomText(key) {
-        let text = "";
-        switch (key) {
-            case "js":
-                text = "Javascript!"
-                break;
-            case "py":
-                text = "Python!";
-                break;
-            default:
-                break;
-        }
-
-        this.add.text(
-            Phaser.Math.Between(10, 630),
-            Phaser.Math.Between(10, 470),
+    createRandomText(user) {
+        let text = "🐦" + user;
+        const t = this.add.text(
+            Phaser.Math.Between(10, 600),
+            Phaser.Math.Between(10, 240),
             text
         );
+        setTimeout(() => {
+            t.destroy();
+        }, 2000)
     }
 
     // check methods
     // --------------------------
 
+    createBall(type) {
+        if (type == "javascript") {
+            const b = this.physics.add.sprite(160,160,"js");
+            this.ballsGroup.add(b);
+                b.setGravityY(1000);
+                b.setVelocityX(Phaser.Math.Between(-50,50));
+                b.lang = "js"
+        }
+        else {
+            const b = this.physics.add.sprite(400,160,"python");
+            this.ballsGroup.add(b);
+            b.setGravityY(1000);
+            b.lang = "py";
+            b.setVelocityX(Phaser.Math.Between(-50,50));
+        }
+        
+    }
     checkKeys() {
-        if (this.teclas.right.isDown) {
-            this.monkey.x += 3;
+        if (this.teclas.js.isDown) {
+            const b = this.physics.add.sprite(160,160,"js");
+            this.ballsGroup.add(b);
+            b.setGravityY(1000);
+            b.setVelocityX(Phaser.Math.Between(-50,50));
+            b.lang = "js"
         }
-        if (this.teclas.left.isDown) {
-            this.monkey.x -= 3;
-        }
-        if (this.teclas.up.isDown) {
-            this.monkey.y -= 3;
-        }
-        if (this.teclas.down.isDown) {
-            this.monkey.y += 3;
+        if (this.teclas.py.isDown) {
+            const b = this.physics.add.sprite(400,160,"python");
+            this.ballsGroup.add(b);
+            b.setGravityY(1000);
+            b.lang = "py";
+            b.setVelocityX(Phaser.Math.Between(-50,50));
+            
         }
     }
 
@@ -86,12 +116,24 @@ export default class MainScene extends Phaser.Scene {
     // ----------------------------
 
     init() {
-        this.createMonkey();
         this.createKeys();
+        this.createBase();
         this.createTwitterListener();
     }
 
     update() {
         this.checkKeys();
+        this.physics.collide(this.baseGroup,this.ballsGroup,(base,ball) => {
+            ball.destroy();
+            if (ball.lang == "js")
+                {
+                if (this.aJs.y >= 265)
+                this.aJs.y--;
+                
+            }
+            else 
+            if (this.aPy.y >= 265)
+                this.aPy.y--;
+        });   
     }
 }
