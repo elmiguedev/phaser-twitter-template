@@ -15,8 +15,8 @@ class TwitterManager {
 
     // twitter stream
     // -------------------------------
-    
-    
+
+
     createStream(key, wordsArray, callback) {
         this.streams[key] = this.twitterClient.stream("statuses/filter", {
             track: wordsArray
@@ -32,17 +32,17 @@ class TwitterManager {
 
     // twitter post
     // -------------------------------
-    
+
     sendTweet(tweet) {
         this.twitterClient.post("statuses/update",
-        {
-            status: tweet.message,
-            attachment_url: tweet.imageUrl
-        },
-        (err,res) => {
-            if (tweet.callback)
-                tweet.callback();
-        })
+            {
+                status: tweet.message,
+                attachment_url: tweet.imageUrl
+            },
+            (err, res) => {
+                if (tweet.callback)
+                    tweet.callback();
+            })
         this.twitterClient.postMediaChunked({
 
         })
@@ -50,25 +50,10 @@ class TwitterManager {
 
 
     parseTweet(tweet) {
-        const parsedTweet = new Tweet();
-
-        parsedTweet.id = tweet.id;
-        parsedTweet.idStr = tweet.id_str;
-        parsedTweet.date = tweet.created_at;
-        parsedTweet.message = tweet.text;
-        parsedTweet.username = tweet.user.screen_name;
-        parsedTweet.displayName = tweet.user.name;
-        parsedTweet.location = tweet.user.location;
-        parsedTweet.id = tweet.id;
-        parsedTweet.retweets = tweet.retweet_count;
-        parsedTweet.likes = tweet.favorite_count;
-        parsedTweet.hashtags = tweet.entities.hashtags.map(h => h.text);
-        parsedTweet.mentions = tweet.entities.user_mentions.map(m => m.screen_name);
-
+        const parsedTweet = Tweet.fromTweetRepresentation(tweet);
         if (tweet.entities.media) {
             parsedTweet.media = tweet.entities.media.map(m => m.media_url);
         }
-
         return parsedTweet;
     }
 
