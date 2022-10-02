@@ -31,7 +31,7 @@ class GameServer {
         this.serverSocket = io(this.httpServer);
 
         // define the game port
-        this.port = process.env.PORT || 5000;
+        this.port = process.env.PORT || 6699;
     }
 
     createTwitterManager() {
